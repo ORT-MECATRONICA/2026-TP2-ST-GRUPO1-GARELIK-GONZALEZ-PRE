@@ -54,7 +54,6 @@ void setup() {
   Serial.println("WiFi connected.");
   
   configTime(gmtOffset_sec, daylightOffset_sec2, ntpServer);
-  printLocalTime();
 
   WiFi.disconnect(true);
   WiFi.mode(WIFI_OFF);
@@ -151,24 +150,4 @@ void ajustarUmbral() { // modo pantalla 2
   display.print("SET: ");
   display.print(SRGMT);
   display.display();
-}
-
-void printLocalTime(){
-  struct tm timeinfo;
-  if(!getLocalTime(&timeinfo)){
-    Serial.println("Failed to obtain time");
-    return;
-  }
-  Serial.println(&timeinfo, "%H:%M:%S");
-  Serial.print("Hour: ");
-  Serial.println(&timeinfo, "%H");
-  Serial.print("Minute: ");
-  Serial.println(&timeinfo, "%M");
-  Serial.print("Second: ");
-  Serial.println(&timeinfo, "%S");
-
-  Serial.println("Time variables");
-  char timeHour[3];
-  strftime(timeHour,3, "%H", &timeinfo);
-  Serial.println(timeHour);
 }
